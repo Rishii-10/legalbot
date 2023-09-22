@@ -1,120 +1,30 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>CHATBOT</title>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif; /*change Font*/
-            margin: 0;
-            padding: 0;
-            background-color: black;
-        }
-        .container{
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            height: 400px;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgb(47, 145, 145);
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            border-radius: 5px;
-        }
-        #chat-container{
-            height: 400px;
-            overflow-y: scroll;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-        #input-container{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #user-input{
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #send-button{
-            background-color: white;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            border-radius :5px;
-            cursor: pointer
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to our Chatbot</h1>
-        <div id="chat container">
-            <!=-- Chat messages will appear here -->
-        </div>
-        <div id="input-container">
-            <input type="text " id="user-input" placeholder="Type your message...">
-            <button id="send-button">Send</button>
-        </div>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8"> 
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="chatbot">
+      <header>
+        <h2>Chatbot</h2>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined">smart_toy</span>
+          <p>Welcome to Legalease! I am here to assist you regarding your legal queries!</p>
+        </li>
+      </ul>
+      <div class="chat-input">
+        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <span id="send-btn" class="material-symbols-rounded">send</span>
+      </div>
     </div>
-    <script>
-        // JavaScript for chatbot functionality
-        const chatContainer = document.getElementById("chat-container");
-        const userInput = document.getElementById("user-input");
-        const sendButton = document.getElementById("send-button");
-
-        // Function to add a message to the chat
-        // Function to add a message to the chat and log it
-        function addMessage(message, isUser = false) {
-            const messageDiv = document.createElement("div");
-            messageDiv.className = isUser ? "user-message" : "bot-message";
-            messageDiv.innerText = message;
-            chatContainer.appendChild(messageDiv);
-
-            // Scroll to the bottom of the chat
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-
-            // Log the message
-            chatLog.push(message);
-            console.log(chatLog);
-        }
-
-        // Simulate chatbot response (replace with actual chatbot logic)
-        function simulateChatbotResponse(userMessage) {
-            setTimeout(() => {
-                const botResponse = "This is a chatbot response. Replace this with your chatbot logic.";
-                addMessage(`Bot: ${botResponse}`);
-            }, 500);
-        }
-        // Function to handle sending a user message
-        function sendMessage() {
-            const userMessage = userInput.value.trim();
-            if (userMessage !== "") {
-                addMessage(`You: ${userMessage}`, true);
-
-                // Replace this with actual chatbot logic
-                simulateChatbotResponse(userMessage);
-
-                userInput.value = "";
-            }
-        }
-
-        // Event listener for clicking the send button
-        sendButton.addEventListener("click", sendMessage);
-
-        // Event listener for pressing Enter key in the input field
-        userInput.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-
-    </script>
-</body>
+  </body>
 </html>
