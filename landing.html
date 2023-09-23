@@ -11,6 +11,13 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div class="language-dropdown">
+        <label for="language-select">Select Language:</label>
+        <select id="language-select">
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+        </select>
+    </div>
     <div class="chatbot">
       <header>
         <h2>Chatbot</h2>
@@ -25,6 +32,9 @@
         <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
         <span id="send-btn" class="material-symbols-rounded">send</span>
       </div>
+      <button id="voice-button">Voice</button>
+      <label for="file-input">Click to select</label>
+      <input type="file" id="file-input" accept=".pdf,.png">
     </div>
   </body>
 </html>
