@@ -1,10 +1,28 @@
 const chatbox = document.querySelector(".chatbox");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
+const voiceButton = document.getElementById("voice-button");
+const fileInput = document.getElementById('file-input');
+const fileUploadLabel = document.querySelector('.file-upload label');
 
 let userMessage = null; // Variable to store user's message
 const API_KEY = "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"; // Paste your API key here
 const inputInitHeight = chatInput.scrollHeight;
+
+fileLabel.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', handleFileUpload);
+
+function handleFileUpload(e) {
+  const selectedFile = e.target.files[0];
+  if (selectedFile) {
+    // You can access the selected file using `selectedFile`
+    // Here, you can upload the file to your server or perform other actions
+    console.log('Selected File:', selectedFile.name);
+  }
+}
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -16,6 +34,71 @@ const createChatLi = (message, className) => {
     return chatLi; // return chat <li> element
 }
 
+function handleFileUpload(e) {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      // You can access the selected file using `selectedFile`
+      // Here, you can upload the file to your server or perform other actions
+      console.log('Selected File:', selectedFile.name);
+    }
+  }
+  
+function handleDragOver(e) {
+    e.preventDefault();
+    fileUploadLabel.classList.add('drag-over');
+  }
+  
+function handleDragLeave(e) {
+    e.preventDefault();
+    fileUploadLabel.classList.remove('drag-over');
+  }
+  
+function handleFileDrop(e) {
+    e.preventDefault();
+    fileUploadLabel.classList.remove('drag-over');
+  
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles.length > 0) {
+      // You can access the dropped files using `droppedFiles`
+      // Here, you can upload the files to your server or perform other actions
+      console.log('Dropped Files:', droppedFiles);
+    }
+  }
+
+function startVoiceRecognition() {
+    const recognition = new webkitSpeechRecognition(); // Create a recognition instance
+    recognition.continuous = false; // Set to true for continuous recognition
+    recognition.lang = "en-US"; // Set the recognition language
+  
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      chatInput.value = transcript; // Set the chat input to the recognized text
+    };
+  
+    recognition.start(); // Start listening
+}
+// Function to handle voice output (text-to-speech)
+function speak(text) {
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+    synth.speak(utterance);
+  }
+  
+  // Add a click event listener to the voice button
+  voiceButton.addEventListener("click", function () {
+    startVoiceRecognition();
+  });
+// Modify the handleChat function to also speak the user's message
+function handleChat() {
+    userMessage = chatInput.value.trim();
+    if (!userMessage) return;
+  
+    // ... (rest of the handleChat function as before)
+  
+    // After generating the response, speak it
+    const responseText = incomingChatLi.querySelector("p").textContent;
+    speak(responseText);
+  }
 const generateResponse = (chatElement) => {
     const API_URL = "https://api.openai.com/v1/chat/completions";
     const messageElement = chatElement.querySelector("p");
